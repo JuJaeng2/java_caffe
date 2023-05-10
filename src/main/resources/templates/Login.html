@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/Login.css" />
+    <title>Login Page</title>
+  </head>
+  <body>
+    <div class="title"><a href="main.html#home">THE CAFE OF STUDY</a></div>
+    <div class="center">
+      <div class="form_container">
+        <form class="login-form" action="" method="post">
+          <h2>Login</h2>
+          <div class="txt_field">
+            <input type="text" required />
+            <span></span>
+            <label>id</label>
+          </div>
+          <div class="txt_field">
+            <input type="password" required />
+            <span></span>
+            <label>Password</label>
+          </div>
+          <!-- <div class="forgot_pw">Forgot Password?<a href="#"></a></div> -->
+          <input type="submit" value="Login" />
+
+          <div class="login_signup">
+            Don't have an account? <a href="#" id="signup">Sign Up</a>
+          </div>
+        </form>
+
+        <form class="signup-form" action="" method="post">
+          <h2>Sign Up</h2>
+          <div class="txt_field">
+            <input type="username" placeholder="Enter your username" required />
+          </div>
+          <div class="txt_field">
+            <input type="id" placeholder="Enter your id" required />
+          </div>
+          <div class="txt_field">
+            <input type="password" placeholder="Create password" required />
+          </div>
+          <!-- <div class="txt_field">
+            <input type="password" placeholder="Confirm password" required />
+          </div> -->
+          <input type="submit" value="SignUp" />
+          <div class="login_signup">Already have an account? <a href="#" id="login">Login</a></div>
+        </form>
+      </div>
+    </div>
+    <script src="js/Login.js"></script>
+  </body>
+</html>

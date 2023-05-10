@@ -1,0 +1,126 @@
+body {
+  background-color: #faf2f2;
+  font-family: inherit;
+}
+.title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  padding: 30px;
+  letter-spacing: 5px;
+}
+.title a {
+  color: #795548;
+  text-decoration: none;
+}
+
+.form_container {
+  margin: 20px auto;
+  width: 400px;
+  background-color: #fffcfc;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.form_container h2 {
+  text-align: center;
+  font-size: 28px;
+  color: #795548;
+  padding: 10px;
+}
+.center form {
+  padding: 0 40px;
+  box-sizing: border-box;
+}
+form .txt_field {
+  position: relative;
+  border-bottom: 2px solid #adadad;
+  margin: 30px 0;
+}
+.txt_field input {
+  width: 100%;
+  padding: 0 5px;
+  height: 40px;
+  font-size: 16px;
+  border: none;
+  background: none;
+  outline: none;
+}
+.txt_field label {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  color: #adadad;
+  transform: translateY(-50%);
+  font-size: 16px;
+  pointer-events: none;
+  transition: 0.5s;
+}
+.txt_field span::before {
+  content: "";
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: #795548;
+  transition: 0.5s;
+}
+.txt_field input:focus ~ label,
+.txt_field input:valid ~ label {
+  top: -5px;
+  color: #795548;
+}
+.txt_field input:focus ~ span::before,
+.txt_field input:valid ~ span::before {
+  width: 100%;
+}
+.forgot_pw {
+  text-align: right;
+  font-size: 14px;
+  margin: -15px 0 30px 5px;
+  color: #a6a6a6;
+  cursor: pointer;
+}
+.forgot_pw:hover {
+  text-decoration: underline;
+}
+
+input[type="submit"] {
+  width: 100%;
+  height: 50px;
+  border: 1px solid;
+  background: #b4876c;
+  border-radius: 25px;
+  font-size: 18px;
+  color: #e9f4fb;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+}
+input[type="submit"]:hover {
+  background: #795548;
+  transition: 0.5s;
+}
+.login_signup {
+  padding: 15px;
+  text-align: center;
+  font-size: 16px;
+  color: #666666;
+}
+.login_signup a {
+  color: #795548;
+  text-decoration: none;
+}
+.login_signup a:hover {
+  text-decoration: underline;
+}
+
+.signup-form {
+  display: none;
+}
+
+.login-form {
+  display: block;
+}
