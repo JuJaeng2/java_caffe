@@ -10,15 +10,16 @@
     <div class="title"><a href="main.html#home">THE CAFE OF STUDY</a></div>
     <div class="center">
       <div class="form_container">
-        <form class="login-form" action="" method="post">
+
+        <form class="login-form" action="/login" method="post">
           <h2>Login</h2>
           <div class="txt_field">
-            <input type="text" required />
+            <input name="userId" type="text" required />
             <span></span>
             <label>id</label>
           </div>
           <div class="txt_field">
-            <input type="password" required />
+            <input name="userPassword" type="password" required />
             <span></span>
             <label>Password</label>
           </div>
@@ -30,16 +31,16 @@
           </div>
         </form>
 
-        <form class="signup-form" action="" method="post">
+        <form class="signup-form" action="/signUp" method="post">
           <h2>Sign Up</h2>
           <div class="txt_field">
-            <input type="username" placeholder="Enter your username" required />
+            <input name="signupName" type="username" placeholder="Enter your username" required />
           </div>
           <div class="txt_field">
-            <input type="id" placeholder="Enter your id" required />
+            <input name="signupId" type="id" placeholder="Enter your id" required />
           </div>
           <div class="txt_field">
-            <input type="password" placeholder="Create password" required />
+            <input name="signupPassword" type="password" placeholder="Create password" required />
           </div>
           <!-- <div class="txt_field">
             <input type="password" placeholder="Confirm password" required />
