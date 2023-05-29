@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "user")
+@Table(name = "jUser")
 public class User {
 
     @Id
@@ -22,6 +22,8 @@ public class User {
     private String userName;
     @Column(name = "u_pw")
     private String userPassword;
+//    @Column(name = "o_id")
+//    private Integer userOrderId;
 
     public static User toUserEntity(UserDto userDto){ // dto에 담겨온 파라미터를 entity객체로 넘기는 작업
         User user = new User();

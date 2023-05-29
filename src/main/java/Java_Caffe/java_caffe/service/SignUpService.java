@@ -33,8 +33,6 @@ public class SignUpService {
          * 1. 회원이 입력한 이메일로 DB에서 조회를 함
          * 2. DB에서 조회한 비밀번호와 사용자가 입력한 비밀번호가 일치하는지 판단
          * */
-
-
         Optional<User> byUserId = userRepository.findByuserId(userDto.getUserId());
         if (byUserId.isPresent()){
             //조회 결과가 있다 ( 해당 ID를 가진 회원 정보가 있다.)
