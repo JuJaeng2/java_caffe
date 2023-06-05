@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+  <title>THE CAFE OF STUDY</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="css/main.css" />
+  <!-- <style>
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: "Playfair Display";
+      letter-spacing: 5px;
+    }
+
+  </style> -->
+</head>
+<body>
+<div class="w3-top">
+  <div
+          class="w3-bar w3-brown w3-padding w3-card"
+          style="letter-spacing: 4px"
+  >
+    <a href="#home" class="w3-bar-item w3-button w3-hide-small">
+      THE CAFE OF STUDY
+      <div th:text = "${session.loginId}"></div>
+    </a>
+    <!-- Right-sided navbar links. Hide them on small screens -->
+    <div class="w3-right">
+      <a href="#guide" class="w3-bar-item w3-button w3-hide-small"
+      >이용 방법</a
+      >
+      <a href="#menu" class="w3-bar-item w3-button">메뉴</a>
+      <a href="#contact" class="w3-bar-item w3-button">예약</a>
+      <a th:href="@{/reserv}" class="w3-bar-item w3-button">예약 정보 확인</a>
+
+      <!-- userName 값이 있을때 -->
+      <th:block th:if="${userName}">
+        <a
+                th:href="@{/logout}"
+                class="w3-bar-item w3-button w3-large w3-hide-small"
+                style="font-weight: bold; margin-left: 15px"
+        >로그아웃</a>
+        <a
+                th:href="@{/reserv}"
+                class="w3-bar-item w3-button w3-large w3-hide-small"
+                style="font-weight: bold; margin-left: 15px"
+                th:text = "${userName}"
+        >유저이름</a>
+      </th:block>
+
+      <!-- userName 값이 없을때 -->
+      <th:block th:if="${userName == null}">
+        <a
+                th:href="@{/login}"
+                class="w3-bar-item w3-button w3-large w3-hide-small"
+                style="font-weight: bold; margin-left: 15px"
+        >로그인</a>
+      </th:block>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header
+        class="w3-display-container w3-content w3-wide"
+        style="max-width: 1800px; min-width: 500px"
+        id="home"
+>
+  <img class="w3-image" src="img/Cafe.jpg" width="1800" height="800" />
+</header>
+
+<!-- Page content -->
+<div class="w3-content" style="max-width: 1100px">
+  <!-- About Section -->
+  <div class="w3-row w3-padding-64" id="guide">
+    <div
+            class="w3-col m6 w3-padding-large w3-round w3-brown"
+            style="margin-top: 10px; height: 500px"
+    >
+      <h4 class="w3-center">좌석 현황</h4>
+      <hr />
+      <div class="container">
+        <div class="box" style="--i: 4"></div>
+        <div class="box" style="--i: 2"></div>
+        <div class="box" style="--i: 4; margin-left: 20px"></div>
+        <div class="box" style="--i: 2"></div>
+        <div class="box" style="--i: 2; margin-left: 20px"></div>
+        <div class="box" style="--i: 2"></div>
+        <div class="box" style="--i: 4"></div>
+        <div class="box" style="--i: 4"></div>
+        <div class="box" style="--i: 2"></div>
+      </div>
+      <div class="container" style="margin-top: 30px">
+        <div class="box" style="--i: 2"></div>
+        <div class="box" style="--i: 2"></div>
+        <div class="box" style="--i: 4; margin-left: 20px"></div>
+        <div class="box" style="--i: 4"></div>
+        <div class="box" style="--i: 4; margin-left: 20px"></div>
+        <div class="box" style="--i: 4"></div>
+        <div class="box" style="--i: 4"></div>
+        <div class="box" style="--i: 2"></div>
+        <div class="box" style="--i: 2"></div>
+      </div>
+      <div class="container" style="margin-top: 5px">
+        <div class="box" style="--i: 4"></div>
+        <div class="box" style="--i: 2"></div>
+        <div class="box" style="--i: 2; margin-left: 20px"></div>
+        <div class="box" style="--i: 4"></div>
+        <div class="box" style="--i: 4; margin-left: 20px"></div>
+        <div class="box" style="--i: 4"></div>
+        <div class="box" style="--i: 4"></div>
+        <div class="box" style="--i: 4"></div>
+        <div class="box" style="--i: 2"></div>
+      </div>
+      <div class="container" style="margin-top: 30px">
+        <div class="box" style="--i: 4"></div>
+        <div class="box" style="--i: 2"></div>
+        <div class="box" style="--i: 2; margin-left: 20px"></div>
+        <div class="box" style="--i: 4"></div>
+        <div class="box" style="--i: 4; margin-left: 20px"></div>
+        <div class="box" style="--i: 4"></div>
+        <div class="box" style="--i: 4"></div>
+        <div class="box" style="--i: 2"></div>
+        <div class="box" style="--i: 2"></div>
+      </div>
+      <br />
+
+      <!-- 예약 좌석 선택 및 현황 -->
+      <form action="./result.html">
+        <br />
+        <a
+                class="sheet"
+                href="#contact"
+                th:style="'--clr: #ff1867;
+                 margin-left: 1%;
+                  align-items: center;
+                  background-color:' + ${sitColor[0]}  +';color:'+${sitColor[0]}+';'"
+                name="A1"
+                onclick="clickSit(this.name)"
+        ><span>A1</span><i></i
+        ></a>
+        <a
+                class="sheet"
+                href="#contact"
+                th:style="'--clr: #ff1867; margin-left: 1%;background-color : ' + ${sitColor[1]} + ';color:'+${sitColor[1]}+';'"
+                name="A2"
+                onclick="clickSit(this.name)">
+          <span>A2</span><i></i
+        ></a>
+        <a
+                class="sheet"
+                href="#contact"
+                th:style="'--clr: #ff1867; margin-left: 1%; background-color : ' + ${sitColor[2]} + ';color:'+${sitColor[2]}+';'"
+                name="A3"
+                onclick="clickSit(this.name)"
+        ><span>A3</span><i></i
+        ></a>
+        <a
+                class="sheet"
+                href="#contact"
+                th:style="'--clr: #ff1867; margin-left: 1%; background-color : ' + ${sitColor[3]} + ';color:'+${sitColor[3]}+';'"
+                name="A4"
+                onclick="clickSit(this.name)"
+        ><span>A4</span><i></i
+        ></a>
+        <a
+                class="sheet"
+                href="#contact"
+                th:style="'--clr: #ff1867; margin-left: 1%; background-color : ' + ${sitColor[4]} + ';color:'+${sitColor[4]}+';'"
+                name="A5"
+                onclick="clickSit(this.name)"
+        ><span>A5</span><i></i
+        ></a>
+        <a
+                class="sheet"
+                href="#contact"
+                th:style="'--clr: #ff1867; margin-left: 1%; background-color : ' + ${sitColor[5]} + ';color:'+${sitColor[5]}+';'"
+                name="A6"
+                onclick="clickSit(this.name)"
+        ><span>A6</span><i></i></a
+        ><br />
+        <br />
+        <a
+                class="sheet"
+                href="#contact"
+                th:style="'--clr: #ff1867; margin-left: 1%; align-items: center; background-color :'+ ${sitColor[6]} +';color:'+${sitColor[6]}+';'"
+                name="B1"
+                onclick="clickSit(this.name)"
+        ><span>B1</span><i></i
+        ></a>
+        <a
+                class="sheet"
+                href="#contact"
+                th:style="'--clr: #ff1867; margin-left: 1%; background-color : ' + ${sitColor[7]} + ';color:'+${sitColor[7]}+';'"
+                name="B2"
+                onclick="clickSit(this.name)"
+        ><span>B2</span><i></i
+        ></a>
+        <a
+                class="sheet"
+                href="#contact"
+                th:style="'--clr: #ff1867; margin-left: 1%; background-color : ' + ${sitColor[8]} + ';color:'+${sitColor[8]}+';'"
+                name="B3"
+                onclick="clickSit(this.name)"
+        ><span>B3</span><i></i
+        ></a>
+        <a
+                class="sheet"
+                href="#contact"
+                th:style="'--clr: #ff1867; margin-left: 1%; background-color : ' + ${sitColor[9]} + ';color:'+${sitColor[9]}+';'"
+                name="B4"
+                onclick="clickSit(this.name)"
+        ><span>B4</span><i></i
+        ></a>
+        <a
+                class="sheet"
+                href="#contact"
+                th:style="'--clr: #ff1867; margin-left: 1%; background-color : ' + ${sitColor[10]} + ';color:'+${sitColor[10]}+';'"
+                name="B5"
+                onclick="clickSit(this.name)"
+        ><span>B5</span><i></i
+        ></a>
+        <a
+                class="sheet"
+                href="#contact"
+                th:style="'--clr: #ff1867; margin-left: 1%; background-color : ' + ${sitColor[11]} + ';color:'+${sitColor[11]}+';'"
+                name="B6"
+                onclick="clickSit(this.name)"
+        ><span>B6</span><i></i></a
+        ><br /><br /><a
+              class="sheet"
+              href="#contact"
+              th:style="'--clr: #ff1867; margin-left: 1%; align-items: center; background-color:' + ${sitColor[12]} + '; color:' + ${sitColor[12]} + ';'"
+              name="C1"
+              onclick="clickSit(this.name)"
+      ><span>C1</span><i></i
+      ></a>
+        <a
+                class="sheet"
+                href="#contact"
+                th:style="'--clr: #ff1867; margin-left: 1%; background-color : ' + ${sitColor[13]} + ';color:'+ ${sitColor[13]} + ';'"
+                name="C2"
+                onclick="clickSit(this.name)"
+        ><span>C2</span><i></i
+        ></a>
+        <a
+                class="sheet"
+                href="#contact"
+                th:style="'--clr: #ff1867; margin-left: 1%; background-color : ' + ${sitColor[14]} + ';color:' + ${sitColor[14]} + ';'"
+                name="C3"
+                onclick="clickSit(this.name)"
+        ><span>C3</span><i></i
+        ></a>
+        <a
+                class="sheet"
+                href="#contact"
+                th:style="'--clr: #ff1867; margin-left: 1%; background-color : ' + ${sitColor[15]} + ';color:'+${sitColor[15]}+';'"
+                name="C4"
+                onclick="clickSit(this.name)"
+        ><span>C4</span><i></i
+        ></a>
+        <a
+                class="sheet"
+                href="#contact"
+                th:style="'--clr: #ff1867; margin-left: 1%; background-color : ' + ${sitColor[16]} + ';color:'+${sitColor[16]}+';'"
+                name="C5"
+                onclick="clickSit(this.name)"
+        ><span>C5</span><i></i
+        ></a>
+        <a
+                class="sheet"
+                href="#contact"
+                th:style="'--clr: #ff1867; margin-left: 1%; background-color : ' + ${sitColor[17]} + ';color:'+${sitColor[17]}+';'"
+                name="C6"
+                onclick="clickSit(this.name)"
+        ><span>C6</span><i></i
+        ></a>
+      </form>
+    </div>
+
+    <div class="w3-col m6 w3-padding-large w3-hide-small">
+      <h1 class="w3-center">이용 방법</h1>
+      <br />
+      <h5 class="w3-center">주의사항 : 외부음식 반입 불가능 합니다.</h5>
+      <p class="w3-large">
+        <br />
+        <span class="w3-tag w3-light-grey">1.</span>
+        원하시는 자리를 선택해주세요.<br /><br />
+        <span class="w3-tag w3-light-grey">2.</span>
+        예약 정보를 입력해주세요.<br /><br />
+        <span class="w3-tag w3-light-grey">3.</span>
+        드시고 싶은 메뉴를 골라주세요.<br /><br />
+        <span class="w3-tag w3-light-grey">4.</span>
+        예약이 완료 되었습니다. 이용해 주셔서 감사합니다.<br /><br />
+      </p>
+      <!-- 큰 화면 일때만 출력 됨 핸드폰이나 화면 크기 축소 돼면 출력 안됌
+        <p class="w3-large w3-text-grey w3-hide-medium">
+        이용 방법123.이용 방법123.이용 방법123.이용 방법123.이용
+        방법123.이용 방법123.이용 방법123.이용 방법123.이용 방법123.이용
+        방법123.이용 방법123.이용 방법123.이용 방법123.
+      </p> -->
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- Menu Section -->
+  <div class="w3-row w3-padding-64" id="menu">
+    <div class="w3-col l6 w3-padding-large">
+      <h1 class="w3-center">메뉴</h1>
+      <hr />
+      <h3 style="font-weight: bold">Coffee</h3>
+      <br />
+      <h4>에스프레소 <input type="checkbox" value="에스프레소" /></h4>
+      <p class="w3-text-grey">3.5</p>
+      <br />
+      <h4>아메리카노 <input type="checkbox" value="아메리카노" /></h4>
+      <p class="w3-text-grey">4.0</p>
+      <br />
+      <h4>카페라떼 <input type="checkbox" value="카페라떼" /></h4>
+      <p class="w3-text-grey">4.5</p>
+      <br />
+      <h4>모카라떼 <input type="checkbox" value="모카라떼" /></h4>
+      <p class="w3-text-grey">5.0</p>
+      <br />
+      <h4>카라멜마끼아또 <input type="checkbox" value="카라멜마끼아또" /></h4>
+      <p class="w3-text-grey">5.0</p>
+      <br />
+      <h4>카푸치노 <input type="checkbox" value="카푸치노" /></h4>
+      <p class="w3-text-grey">5.0</p>
+      <br />
+      <h4>아인슈페너 <input type="checkbox" value="아인슈페너" /></h4>
+      <p class="w3-text-grey">5.0</p>
+      <br />
+      <hr>
+      <h3 style="font-weight: bold">Non-Coffee</h3>
+      <br />
+      <h4>딸기라떼 <input type="checkbox" value="딸기라떼" /></h4>
+      <p class="w3-text-grey">4.5</p>
+      <br />
+      <h4>녹차라떼 <input type="checkbox" value="녹차라떼" /></h4>
+      <p class="w3-text-grey">4.5</p>
+      <br />
+      <h4>고구마라떼 <input type="checkbox" value="고구마라떼" /></h4>
+      <p class="w3-text-grey">4.5</p>
+      <br />
+      <h4>흑임자라떼 <input type="checkbox" value="흑임자라떼" /></h4>
+      <p class="w3-text-grey">5.0</p>
+      <br />
+      <h4>달고나밀크티라떼 <input type="checkbox" value="달고나밀크티라떼" /></h4>
+      <p class="w3-text-grey">5.0</p>
+      <br />
+      <h4>로투스라떼 <input type="checkbox" value="로투스라떼" /></h4>
+      <p class="w3-text-grey">5.0</p>
+      <br />
+      <hr>
+      <h3 style="font-weight: bold">Ade</h3>
+      <br />
+      <h4>레몬에이드 <input type="checkbox" value="레몬에이드" /></h4>
+      <p class="w3-text-grey">3.5</p>
+      <br />
+      <h4>블루베리에이드 <input type="checkbox" value="블루베리에이드" /></h4>
+      <p class="w3-text-grey">4.0</p>
+      <br />
+      <h4>딸기에이드 <input type="checkbox" value="딸기에이드" /></h4>
+      <p class="w3-text-grey">4.0</p>
+      <br />
+      <h4>수제 자몽청 <input type="checkbox" value="수제 자몽청" /></h4>
+      <p class="w3-text-grey">4.0</p>
+      <br />
+      <h4>수제 청귤청 <input type="checkbox" value="수제 청귤청" /></h4>
+      <p class="w3-text-grey">4.5</p>
+      <br />
+      <h4>수제 배도라지청 <input type="checkbox" value="수제 배도라지청" /></h4>
+      <p class="w3-text-grey">4.5</p>
+      <br />
+      <hr>
+      <h3 style="font-weight: bold">Frappuccino</h3>
+      <br />
+      <h4>오레오 프라푸치노 <input type="checkbox" value="오레오 프라푸치노" /></h4>
+      <p class="w3-text-grey">5.0</p>
+      <br />
+      <h4>바닐라 프라푸치노 <input type="checkbox" value="바닐라 프라푸치노" /></h4>
+      <p class="w3-text-grey">5.0</p>
+      <br />
+      <h4>그린티 프라푸치노 <input type="checkbox" value="그린티 프라푸치노" /></h4>
+      <p class="w3-text-grey">5.0</p>
+      <br />
+      <h4>자두 프라푸치노 <input type="checkbox" value="자두 프라푸치노" /></h4>
+      <p class="w3-text-grey">5.5</p>
+      <br />
+      <h4>구름스무디(블루) <input type="checkbox" value="구름스무디(블루)" /></h4>
+      <p class="w3-text-grey">6.0</p>
+      <br />
+      <h4>구름스무디(핑크) <input type="checkbox" value="구름스무디(핑크)" /></h4>
+      <p class="w3-text-grey">6.0</p>
+      <br />
+      <hr>
+      <h3 style="font-weight: bold">Tea</h3>
+      <br />
+      <h4>페퍼민트 <input type="checkbox" value="페퍼민트" /></h4>
+      <p class="w3-text-grey">3.0</p>
+      <br />
+      <h4>얼그레이 <input type="checkbox" value="얼그레이" /></h4>
+      <p class="w3-text-grey">3.0</p>
+      <br />
+      <h4>캐모마일 <input type="checkbox" value="캐모마일" /></h4>
+      <p class="w3-text-grey">3.0</p>
+      <br />
+      <h4>청귤차 <input type="checkbox" value="청귤차9" /></h4>
+      <p class="w3-text-grey">3.5</p>
+      <br />
+      <h4>자몽차 <input type="checkbox" value="자몽차" /></h4>
+      <p class="w3-text-grey">2.5</p>
+      <br />
+      <h4>레몬차 <input type="checkbox" value="레몬차" /></h4>
+      <p class="w3-text-grey">5.0</p>
+      <br />
+      <hr>
+      <h3 style="font-weight: bold">Waffle</h3>
+      <br />
+      <h4>플레인와플 <input type="checkbox" value="플레인와플" /></h4>
+      <p class="w3-text-grey">4.5</p>
+      <br />
+      <h4>크림치즈와플 <input type="checkbox" value="크림치즈와플" /></h4>
+      <p class="w3-text-grey">4.5</p>
+      <br />
+      <h4>초코와플 <input type="checkbox" value="초코와플" /></h4>
+      <p class="w3-text-grey">4.5</p>
+      <br />
+      <h4>아이스크림와플 <input type="checkbox" value="아이스크림와플" /></h4>
+      <p class="w3-text-grey">5.0</p>
+      <br />
+      <button
+              href="#contact"
+              class="w3-button w3-light-grey w3-section"
+              onclick="clickMenue()"
+      >
+        다 골랐어요!
+      </button>
+    </div>
+
+    <div class="w3-col l6 w3-padding-large">
+      <img src="img/menu.jpg" class="w3-round w3-image w3-opacity-min" />
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- Contact Section -->
+  <div class="w3-container w3-padding-64" id="contact">
+    <h1>예약하기</h1>
+    <br />
+    <p>
+      긴 샹들리에와 식물들이 어울러져 마치 외국에 온듯하면서도 친근하게 느낄
+      수 있는 프랑스 엔틱을 추구하는 카페 품질좋은원두, 다양한 음료와 케이크
+      브레드와 수제쿠키, 맥주와 플레이팅 샌드위치 까지 있는건 다 있는
+      카페<br />
+      '발전' 이것은 우리를 움직이게 합니다
+    </p>
+    <p class="w3-text-blue-grey w3-large">
+      <b>영업 시간 : 24시간 연중무휴</b>
+    </p>
+    <p>
+      반려동물 동반 불가능 합니다. <br />다음 이용 고객을 위해 입실,퇴실
+      시간을 준수해 주시기 바랍니다.<br />
+      다른 이용객에게 피해를 줄 수 있는 무분별한 오락, 고성방가는
+      삼가해주시기 바랍니다.<br />
+      실시간 예약시 중복 예약이 발생 할 수 있으며, 해당 사유의 경우
+      고객센터를 통해 전액 환불 받을 수 있습니다.
+    </p>
+    <form action="/reservation" target="_blank" method="post">
+      <p>
+        <input
+                class="w3-input w3-padding-16"
+                type="text"
+                placeholder="이름"
+                required
+                name="userName"
+                th:if="${userName}"
+                th:value = "${userName}"
+        />
+      </p>
+      <p>
+        <input
+                class="w3-input w3-padding-16 sitInput"
+                id="sitInput"
+                type="text"
+                placeholder="좌석 번호"
+                value="C4"
+                required
+                name="sitId"
+        />
+      </p>
+      <p>
+        <input
+                class="w3-input w3-padding-16"
+                type="datetime-local"
+                placeholder="체크인"
+                required
+                name="reservDate"
+                value="2023-06-16T20:00"
+        />
+      </p>
+      <p>
+        <input
+                class="w3-input w3-padding-16"
+                type="datetime-local"
+                placeholder="체크아웃"
+                required
+                name="checkOut"
+                value="2023-06-16T22:00"
+        />
+      </p>
+      <p>
+        <input
+                class="w3-input w3-padding-16"
+                type="text"
+                id="menueName"
+                placeholder="메뉴선택"
+                value="레몬에이드"
+                required
+                name="menueName"
+        />
+      </p>
+      <p>
+<!--        <button class="w3-button w3-light-grey w3-section" type="submit">-->
+<!--          메뉴랑 같이 예약하기-->
+<!--        </button>-->
+<!--        <br />-->
+        <button class="w3-button w3-light-grey w3-section" type="submit">
+          예약만하기
+        </button>
+      </p>
+    </form>
+  </div>
+
+  <!-- End page content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-center w3-light-grey w3-padding-32">
+  <p>
+    Java Applications Programming-THE CAFE OF STUDY-Team Project<br />
+    컴퓨터공학부 이소용, 주재영, 오진호, 최재희<br />
+    (31065) 충청남도 천안시 동남구 백석대학로1<br />
+    백석대학교 TEL : 학부 041-550-0726 대학원 02-520-0712 FAX : 041-550-0574
+    bctl@bu.ac.kr<br />
+    copyright (C) 2016 Baekseok University. All rights reserved.
+  </p>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>
